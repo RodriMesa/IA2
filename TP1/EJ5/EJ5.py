@@ -12,22 +12,17 @@ from NodoTemple import NodoTemple
 
 
 def main():
-    start_time = time.time()
-    valor_init = (3,1,4,2,48,21,33,73,21)
-    layout = armar_espacio(4,4)
-    a = Temple(40, 0.01, valor_init, layout)
-    valores=[]
-    for _ in range(100):
-        solucion = a.solver()
-        valores.append(solucion[1])
-    plt.hist(valores, bins= 'auto', color= '#0504aa',
-    alpha=0.7, rwidth=0.85)
-    plt.grid(axis='y', alpha=0.75)
-    plt.xlabel('Valor')
-    plt.ylabel('Frecuencia')
-    plt.title('Histograma')
-    plt.text(23, 45, r'$\mu=15, b=3$')
-    print("--- %s seconds ---" % (time.time() - start_time))
+    layout = armar_espacio(2,2)
+    #valor_init=tuple(random.sample(range(1,layout["Val_max"]+1),random.randint(1,layout["Val_max"])))
+    valor_init=(1,3,4,2,5,22)
+    a = Temple(15, 1500, valor_init, layout)
+    solucion = a.solver()
+    print(solucion[2])
+    plt.plot(range(1,len(solucion[3])+1),solucion[3])
+    plt.xlabel('Iteraciones')
+    plt.ylabel('Costo')
+    plt.title('Algoritmo de Temple')
+    plt.grid()
     plt.show()
 
 if __name__=='__main__':
